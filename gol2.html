@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<title>W3.CSS</title>
+<script src="gol4.js" type="text/javascript" charset="utf-8" async defer></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<style>
+    canvas{
+	border:  1px solid black;
+	}
+	.slidecontainer {
+  width: 100%; /* Width of the outside container */
+}
+
+/* The slider itself */
+.slider {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  width: 100%; /* Full-width */
+  height: 25px; /* Specified height */
+  background: #d3d3d3; /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #4CAF50; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #4CAF50; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+</style>
+
+<body>
+    <div class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:none" id="mySidebar">
+        <button class="w3-bar-item w3-button w3-large" onclick="w3_close()">Close &times;</button>
+        <h1>Conways Game of Life</h1>
+        <h2>Simulate Life at the push a of button!!!</h2>
+        <label for="dropgrid">Gridsize</label>
+        <select name="gridsize" id="dropgrid">
+            <option onclick="update_field()" id="dropgrid_click" value="100">100x100</option>
+            <option onclick="update_field()" id="dropgrid_click" value="200">200x200</option>
+            <option onclick="update_field()" id="dropgrid_click" value="400">400x400</option>
+            <option onclick="update_field()" id="dropgrid_click" value="1000">1000x1000</option>
+            <option onclick="update_field()" id="dropgrid_click" value="2000">2000x2000</option>
+        </select>
+        <label for="dropres">Size of the cell</label>
+        <select name="resolution" id="dropres">
+            <!--option onclick="update_field()" id="dropres_click" value="1">1x1</option-->
+            <option onclick="update_field()" id="dropres_click" value="5">5x5</option>
+            <option onclick="update_field()" id="dropres_click" value="10">10x10</option>
+            <option onclick="update_field()" id="dropres_click" value="20">20x20</option>
+        </select>
+        <br>
+        <label for="dropcolor_live">Color of the living cell:</label>
+        <select name="color_live" id="dropcolor_live">
+            <!--option onclick="update_field()" id="dropres_click" value="1">1x1</option-->
+            <option onclick="update_field()" id="dropcolor_click" value="1">red</option>
+            <option onclick="update_field()" id="dropcolor_click" value="2">green</option>
+            <option onclick="update_field()" id="dropcolor_click" value="3">blue</option>
+        </select>
+        <br>
+        <label for="dropcolor_dead">Color of the dead cell:</label>
+        <select name="color_dead" id="dropcolor_dead">
+            <!--option onclick="update_field()" id="dropres_click" value="1">1x1</option-->
+            <option onclick="update_field()" id="dropcolor_click" value="1">red</option>
+            <option onclick="update_field()" id="dropcolor_click" value="2">green</option>
+            <option onclick="update_field()" id="dropcolor_click" value="3">blue</option>
+        </select>
+        <br>
+        <label for="generations">Enter number of generations: 0=infinte loop</label>
+        <input type="text" name="generations" value="0" id="generations">
+        <br>
+        <input type="button" name="start" value="Start" onclick="start_animation()">
+        <input type="button" name="pause" value="Pause" onclick="stop_animation()">
+    </div>
+    <div id="main">
+        <div class="w3-teal">
+            <button id="openNav" class="w3-button w3-teal w3-xlarge" onclick="w3_open()">&#9776;</button>
+        </div>
+        <canvas id=canvas>
+        </canvas>
+        <div class="w3-container">
+            <p>In this example, the sidebar is hidden (style="display:none")</p>
+            <p>It is shown when you click on the menu icon in the top left corner.</p>
+            <p>When it is opened, it shifts the page content to the right.</p>
+            <p>We use JavaScript to add a 25% left margin to the div element with id="main" when this happens. The value "25%" matches the width of the sidebar.</p>
+        </div>
+    </div>
+    <script>
+    function w3_open() {
+        document.getElementById("main").style.marginLeft = "25%";
+        document.getElementById("mySidebar").style.width = "25%";
+        document.getElementById("mySidebar").style.display = "block";
+        document.getElementById("openNav").style.display = 'none';
+    }
+
+    function w3_close() {
+        document.getElementById("main").style.marginLeft = "0%";
+        document.getElementById("mySidebar").style.display = "none";
+        document.getElementById("openNav").style.display = "inline-block";
+    }
+    </script>
+</body>
